@@ -3,7 +3,7 @@ jobs:
   build:
     docker:
     - image: circleci/node:7.10
-    working_directory: ~/repo
+    working_directory: ./
     steps:
      - checkout
      - run: npm install
