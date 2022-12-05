@@ -6,5 +6,6 @@ jobs:
     working_directory: ~/restdemo
     steps:
      - checkout
+     - run: npm init
      - run: npm install --save
      - run: npm test
