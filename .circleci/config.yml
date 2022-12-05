@@ -7,4 +7,4 @@ jobs:
     steps:
      - checkout
      - run: npm install --save
-     - run: npm run test
+     - run: npm test
