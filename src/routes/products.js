@@ -5,14 +5,25 @@ const product = require('../models/product')
 
 
 router.get('/', (req, res)=>{
+    try{
     res.send('hello, welcome to our product catalog')
+    }
+    catch(err)
+    {
+        res.status(400).send(err)
+    }
 })
 
 
 router.get('/products', async(req, res)=>{
+    try{
     const prod = await product.find()
     res.status(200)
     res.json(prod)
+    }
+    catch(err){
+        res.status(400).send(err)
+    }
 })
 
 
@@ -39,16 +50,16 @@ router.post('/products', async(req, res)=>{
         price:req.body.price
         })     
         try{
-            finalProd=await newProd.save()
+            finalProd = await newProd.save()
             res.status(200).send(finalProd)
             }
-            catch(err){
-                if(err.code==11000)
-                {
-                    res.status(409).send('id already exists')
-                    return
-                }
-                res.status(400).send(err)
+        catch(err){
+            if(err.code==11000)
+            {
+                res.status(409).send('id already exists')
+                return
+            }
+            res.status(400).send(err)
             }
         })
 
@@ -65,11 +76,7 @@ router.put('/products/:pid', async(req, res)=>{
     }
     catch(err)
     {   
-        if(err instanceof mongoose.CastError){
-            res.status(400).send('invalid product id')
-            return
-        }
-        res.json(err)
+        res.status(400).json(err)
     }})
 
     
@@ -85,10 +92,7 @@ router.delete('/products/:pid', async(req, res)=>{
     }
     catch(err)
     {   
-        if(err instanceof mongoose.CastError){
-            res.status(400).send('invalid product id')
-        }
-        res.json(err)
+        res.status(400).json(err)
     }})
 
     

@@ -34,8 +34,7 @@ describe('catalog API', ()=>{
             .end((err, response)=>{
                 response.should.have.status(200)
                 response.body.should.be.a('array')
-                response.body.should.length(0)
-            done()
+             done()
             })
         })
     })
